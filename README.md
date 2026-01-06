@@ -24,7 +24,7 @@ A beautiful weather application built with **Flutter** that provides real-time w
 ## ✨ ScreenShots
 
 <p align="center">
-  <img src="/assets/screenshots/weather_details.png" width="300" />
+  <img src="/assets/screenshots/weather_detail.png" width="300" />
   <img src="/assets/screenshots/search_section.png" width="300" />
 </p>
 
