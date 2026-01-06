@@ -23,8 +23,8 @@ class WeatherCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                weather.themeColor.withOpacity(0.8),
-                weather.themeColor.withOpacity(0.4),
+                weather.themeColor.withValues(alpha: 0.8),
+                weather.themeColor.withValues(alpha: 0.4),
               ],
             ),
           ),

@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:weather_app/models/weather_model.dart';
 
 class WeatherService {
   // Replace with your OpenWeatherMap API key
   // Get your free API key from: https://openweathermap.org/api
-  static const String apiKey = 'YOUR_API_KEY_HERE';
+  static const String apiKey = 'e763390145cee43641562613795e4ea6';
   static const String baseUrl = 'https://api.openweathermap.org/data/2.5';
 
   // Get current weather by city name

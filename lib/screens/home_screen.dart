@@ -92,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            weather.themeColor.withOpacity(0.8),
-            weather.themeColor.withOpacity(0.4),
-            weather.themeColor.withOpacity(0.2),
+            weather.themeColor.withValues(alpha: 0.8),
+            weather.themeColor.withValues(alpha: 0.4),
+            weather.themeColor.withValues(alpha: 0.2),
           ],
         ),
       ),
