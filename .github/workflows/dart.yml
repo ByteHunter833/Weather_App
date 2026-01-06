@@ -1,7 +1,6 @@
 name: iOS-ipa-build
-
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Можно добавить inputs для версии/тега
 
 permissions:
   contents: write
@@ -10,7 +9,6 @@ jobs:
   build-ios:
     name: 🎉 iOS Build
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -21,29 +19,22 @@ jobs:
 
       - run: flutter pub get
 
-      - run: pod repo update
+      - name: Install Pods
+        run: pod install --repo-update  # repo-update на всякий случай
         working-directory: ios
-      - run: echo "KEY LENGTH = $(echo ${{ secrets.OPEN_WEATHER_API_KEY }} | wc -c)"
-      - name: Build iOS
 
+      - name: Build IPA (recommended way)
         run: |
-          flutter build ios --release --no-codesign \
+          flutter build ipa --release --no-codesign \
             --dart-define=OPEN_WEATHER_API_KEY=${{ secrets.OPEN_WEATHER_API_KEY }}
 
-      - run: mkdir Payload
-        working-directory: build/ios/iphoneos
-
-      - run: mv Runner.app Payload
-        working-directory: build/ios/iphoneos
-
-      - name: Zip output
-        run: zip -qq -r -9 FlutterIpaExport.ipa Payload
-        working-directory: build/ios/iphoneos
-
-      - name: Upload binaries to release
+      # IPA будет в build/ios/ipa/*.ipa (обычно ТвоеПриложение.ipa)
+      - name: Upload IPA to release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: build/ios/iphoneos/FlutterIpaExport.ipa
-          tag: v1.0
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/ios/ipa/*.ipa  # или точный путь, если знаешь имя
+          asset_name: FlutterApp.ipa
+          tag: v1.0  # Или сделай input: ${{ github.event.inputs.version }}
           overwrite: true
-          body: 'This is first release'
+          body: 'New iOS release'
